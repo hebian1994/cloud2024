@@ -1,7 +1,6 @@
 package org.example.cloud.service.impl;
 
 import jakarta.annotation.Resource;
-import org.example.cloud.controller.PayController;
 import org.example.cloud.convertor.PayConvertor;
 import org.example.cloud.entities.PayDO;
 import org.example.cloud.entities.PayVO;
