@@ -11,6 +11,7 @@
     <modules>
         <module>mybatis_generator2024</module>
         <module>cloud-provider-payment</module>
+        <module>cloud-consumer-order</module>
     </modules>
 
     <properties>
