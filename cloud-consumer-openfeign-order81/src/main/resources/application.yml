@@ -1,0 +1,34 @@
+server:
+  port: 81
+spring:
+  application:
+    name: cloud-openfeign-order-service
+  cloud:
+    consul:
+      host: localhost
+      port: 8500
+      discovery:
+        service-name: ${spring.application.name}
+    openfeign:
+      client:
+        config:
+          default:
+            connect-timeout: 10000
+            read-timeout: 10000
+      httpclient:
+        hc5:
+          enabled: true
+      compression:
+        request:
+          enabled: true
+          mime-types: text/xml,application/xml,application/json
+          min-request-size: 2048
+        response:
+          enabled: true
+      circuitbreaker:
+        enabled: true
+        group:
+          enabled: true
+logging:
+  level:
+    org.example.cloud.apis: debug

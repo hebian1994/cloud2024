@@ -16,6 +16,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     public ResultData<String> exception(Exception e) {
         log.error("Global error {}", e.getMessage());
+        e.printStackTrace();
         return ResultData.fail(ReturnCodeEnum.RC500.getCode(), e.getMessage());
     }
 }

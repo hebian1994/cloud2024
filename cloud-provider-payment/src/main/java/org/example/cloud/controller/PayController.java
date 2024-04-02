@@ -1,9 +1,12 @@
 package org.example.cloud.controller;
 
+import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.unit.DataSizeUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.time.DateUtils;
 import org.example.cloud.entities.PayDO;
 import org.example.cloud.entities.PayDTO;
 import org.example.cloud.entities.PayVO;
@@ -15,6 +18,7 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 @Slf4j
@@ -47,6 +51,13 @@ public class PayController {
         if (id < 0) {
             throw new RuntimeException("id should >= 0");
         }
+        log.info("request in {}", DateUtil.now());
+        try {
+            TimeUnit.SECONDS.sleep(15);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        log.info("request out {}", DateUtil.now());
         return ResultData.success(payService.getById(id));
     }
 
