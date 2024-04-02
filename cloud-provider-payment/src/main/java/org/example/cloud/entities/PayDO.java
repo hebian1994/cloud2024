@@ -1,15 +1,18 @@
 package org.example.cloud.entities;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.*;
 
 /**
  * 表名：t_pay
  * 表注释：支付交易表
 */
 @Table(name = "t_pay")
-public class Pay {
+public class PayDO {
     @Id
     @GeneratedValue(generator = "JDBC")
     private Integer id;
