@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.example.cloud.entities.PayDO;
 import org.example.cloud.entities.PayDTO;
 import org.example.cloud.entities.PayVO;
+import org.example.cloud.resp.ResultData;
 import org.example.cloud.service.PayService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.*;
@@ -22,29 +23,29 @@ public class PayController {
 
     @PostMapping(value = "/pay/add")
     @Operation(summary = "addPay", description = "addPay")
-    public Integer addPay(@RequestBody PayDO payDO) {
-        return payService.add(payDO);
+    public ResultData<Integer> addPay(@RequestBody PayDO payDO) {
+        return ResultData.success(payService.add(payDO));
     }
 
     @DeleteMapping(value = "/pay/del/{id}")
-    public Integer delPay(@PathVariable("id") Integer id) {
-        return payService.delete(id);
+    public ResultData<Integer> delPay(@PathVariable("id") Integer id) {
+        return ResultData.success(payService.delete(id));
     }
 
     @DeleteMapping(value = "/pay/update")
-    public Integer delPay(@RequestBody PayDTO payDTO) {
+    public ResultData<Integer> delPay(@RequestBody PayDTO payDTO) {
         PayDO payDO = new PayDO();
         BeanUtils.copyProperties(payDTO, payDO);
-        return payService.update(payDO);
+        return ResultData.success(payService.update(payDO));
     }
 
     @GetMapping(value = "/pay/get/{id}")
-    public PayVO getById(@PathVariable("id") Integer id) {
-        return payService.getById(id);
+    public ResultData<PayVO> getById(@PathVariable("id") Integer id) {
+        return ResultData.success(payService.getById(id));
     }
 
     @GetMapping(value = "/pay/getAll")
-    public List<PayVO> getAll() {
-        return payService.getAll();
+    public ResultData<List<PayVO>> getAll() {
+        return ResultData.success(payService.getAll());
     }
 }
