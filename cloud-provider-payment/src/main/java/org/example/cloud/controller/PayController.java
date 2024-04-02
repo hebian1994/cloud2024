@@ -41,6 +41,9 @@ public class PayController {
 
     @GetMapping(value = "/pay/get/{id}")
     public ResultData<PayVO> getById(@PathVariable("id") Integer id) {
+        if (id < 0) {
+            throw new RuntimeException("id should >= 0");
+        }
         return ResultData.success(payService.getById(id));
     }
 
