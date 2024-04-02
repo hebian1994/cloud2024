@@ -8,6 +8,9 @@
     <packaging>pom</packaging>
 
     <name>cloud2024</name>
+    <modules>
+        <module>mybatis_generator2024</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
