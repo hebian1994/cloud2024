@@ -10,6 +10,8 @@ import org.example.cloud.entities.PayVO;
 import org.example.cloud.resp.ResultData;
 import org.example.cloud.service.PayService;
 import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,6 +19,7 @@ import java.util.List;
 @RestController
 @Slf4j
 @Tag(name = "PayController", description = "PayController")
+@RefreshScope
 public class PayController {
     @Resource
     private PayService payService;
@@ -45,6 +48,14 @@ public class PayController {
             throw new RuntimeException("id should >= 0");
         }
         return ResultData.success(payService.getById(id));
+    }
+
+    @Value("${test}")
+    private String test;
+
+    @GetMapping(value = "/pay/get/consul")
+    public ResultData<String> getFromConsul() {
+        return ResultData.success(test);
     }
 
     @GetMapping(value = "/pay/getAll")
