@@ -5,6 +5,8 @@
     <file url="file://$PROJECT_DIR$/cloud-api-commons/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-consumer-order/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-consumer-order/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-provider-payment-8002/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud-provider-payment-8002/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-provider-payment/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/cloud-provider-payment/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mybatis_generator2024/src/main/java" charset="UTF-8" />

@@ -13,6 +13,7 @@
         <module>cloud-provider-payment</module>
         <module>cloud-consumer-order</module>
         <module>cloud-api-commons</module>
+        <module>cloud-provider-payment-8002</module>
     </modules>
 
     <properties>
