@@ -20,4 +20,7 @@ public interface PayFeignApi {
 
     @GetMapping(value = "/pay/bulkhead/{id}")
     public ResultData bulkhead(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/pay/micrometer/{id}")
+    public ResultData micrometer(@PathVariable("id") Integer id);
 }

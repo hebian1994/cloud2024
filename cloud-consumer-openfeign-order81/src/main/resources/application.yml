@@ -112,3 +112,12 @@ resilience4j:
 #    instances:
 #      cloud-payment-service:
 #        base-config: default
+
+
+management:
+  zipkin:
+    tracing:
+      endpoint: http://localhost:9411/api/v2/spans
+  tracing:
+    sampling:
+      probability: 1.0 # 采样率,默认值0.1(就是10%的链路会被记录下来),值越大搜集越及时

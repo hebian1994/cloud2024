@@ -50,6 +50,11 @@ public class TestServiceImpl implements TestService {
         return payById;
     }
 
+    @Override
+    public ResultData micrometer(Integer id) {
+        return payFeignApi.micrometer(id);
+    }
+
 
     public ResultData myBulkheadFallback(Integer id, Throwable throwable) {
         System.out.println(id);

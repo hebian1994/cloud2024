@@ -10,4 +10,6 @@ public interface TestService {
     CompletableFuture<ResultData> testFixedThreadPoolBulkhead(Integer id);
 
     ResultData ratelimiter(Integer id) ;
+
+    ResultData micrometer(Integer id);
 }
