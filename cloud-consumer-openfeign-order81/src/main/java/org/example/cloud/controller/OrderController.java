@@ -1,11 +1,13 @@
 package org.example.cloud.controller;
 
 import cn.hutool.core.date.DateUtil;
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
 import org.example.cloud.apis.PayFeignApi;
 import org.example.cloud.entities.PayDTO;
 import org.example.cloud.resp.ResultData;
+import org.example.cloud.service.TestService;
 import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +26,9 @@ public class OrderController {
 
     @Resource
     private PayFeignApi payFeignApi;
+
+    @Resource
+    private TestService testService;
 
 
     @PostMapping("/consumer/pay/add")
@@ -54,9 +59,16 @@ public class OrderController {
         return payById;
     }
 
+    @GetMapping("/consumer/pay/bulkhead/{id}")
+    public ResultData testBulkhead(@PathVariable("id") Integer id) {
+        return testService.testBulkheadS(id);
+    }
+
+
     public ResultData myCircuitFallback(Integer id, Throwable throwable) {
         System.out.println(id);
+        System.out.println("myCircuitFallback");
         System.out.println(throwable);
-        return ResultData.success("fallback");
+        return ResultData.success("myCircuitFallback");
     }
 }

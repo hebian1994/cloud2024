@@ -17,4 +17,7 @@ public interface PayFeignApi {
 
     @GetMapping(value = "/pay/circuit/{id}")
     public ResultData circuit(@PathVariable("id") Integer id);
+
+    @GetMapping(value = "/pay/bulkhead/{id}")
+    public ResultData bulkhead(@PathVariable("id") Integer id);
 }
