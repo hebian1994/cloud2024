@@ -4,6 +4,7 @@ import cn.hutool.core.date.DateUtil;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
+import lombok.SneakyThrows;
 import org.example.cloud.apis.PayFeignApi;
 import org.example.cloud.entities.PayDTO;
 import org.example.cloud.resp.ResultData;
@@ -62,6 +63,12 @@ public class OrderController {
     @GetMapping("/consumer/pay/bulkhead/{id}")
     public ResultData testBulkhead(@PathVariable("id") Integer id) {
         return testService.testBulkheadS(id);
+    }
+
+    @SneakyThrows
+    @GetMapping("/consumer/pay/bulkhead-pool/{id}")
+    public ResultData testFixedThreadPoolBulkhead(@PathVariable("id") Integer id) {
+        return testService.testFixedThreadPoolBulkhead(id).get();
     }
 
 

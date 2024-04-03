@@ -26,9 +26,9 @@ spring:
         response:
           enabled: true
       circuitbreaker:
-        enabled: true
+        enabled: false
         group:
-          enabled: true
+          enabled: false
 logging:
   level:
     org.example.cloud.apis: debug
@@ -56,24 +56,24 @@ resilience4j:
     configs:
       default:
         timeout-duration: 70s # 默认1s 超过1s直接降级 (坑)
-  #    #  thread-pool-bulkhead: # 线程池
-  #    #    configs:
-  #    #      default:
-  #    #        max-thread-pool-size: 1
-  #    #        core-thread-pool-size: 1
-  #    #        queue-capacity: 1
-  #    #    instances:
-  #    #      cloud-payment-service:
-  #    #        base-config: default
-  bulkhead: # 信号量舱壁
+  thread-pool-bulkhead: # 线程池
     configs:
       default:
-        max-concurrent-calls: 2
-        #        if the calls >2, wait 1s , then jump into fallback
-        max-wait-duration: 20ms
+        max-thread-pool-size: 1
+        core-thread-pool-size: 1
+        queue-capacity: 1
     instances:
       cloud-payment-service:
         base-config: default
+#  bulkhead: # 信号量舱壁
+#    configs:
+#      default:
+#        max-concurrent-calls: 2
+#        #        if the calls >2, wait 1s , then jump into fallback
+#        max-wait-duration: 20ms
+#    instances:
+#      cloud-payment-service:
+#        base-config: default
 
 
 
