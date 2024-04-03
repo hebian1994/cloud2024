@@ -32,3 +32,68 @@ spring:
 logging:
   level:
     org.example.cloud.apis: debug
+
+# 基于次数的降级
+resilience4j:
+  circuitbreaker: # 降级熔断
+    configs:
+      default: # closed to open to half-open to close or reopen
+        failure-rate-threshold: 50 # 调用失败达到50%后打开断路器
+        sliding-window-type: count_based # 滑动窗口类型
+        sliding-window-size: 6 # 滑动窗口大小 count_based6个请求 time_base6秒
+        minimum-number-of-calls: 6 # 每个滑动窗口的周期
+        automatic-transition-from-open-to-half-open-enabled: true # 开始过度到半开状态
+        wait-duration-in-open-state: 5s # 从开启到半开启需要5s
+        permitted-number-of-calls-in-half-open-state: 2 #半开状态允许通过的最大请求数
+        record-exceptions:
+          - java.lang.Exception
+    instances:
+      cloud-payment-service: # target service name
+        base-config: default # use default config upper
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 10s # 默认1s 超过1s直接降级 (坑)
+#    #  thread-pool-bulkhead: # 线程池
+#    #    configs:
+#    #      default:
+#    #        max-thread-pool-size: 1
+#    #        core-thread-pool-size: 1
+#    #        queue-capacity: 1
+#    #    instances:
+#    #      cloud-payment-service:
+#    #        base-config: default
+#  bulkhead: # 信号量舱壁
+#    configs:
+#      default:
+#        max-concurrent-calls: 2
+#        max-wait-duration: 1s
+#    instances:
+#      cloud-payment-service:
+#        base-config: default
+
+
+
+# 基于慢调用的降级
+#resilience4j:
+#  timelimiter:
+#    configs:
+#      default:
+#        timeout-duration: 10s # 默认1s 超过1s直接降级 (坑)
+#  circuitbreaker:
+#    configs:
+#      default:
+#        failure-rate-threshold: 50 # 调用失败达到50%后打开断路器
+#        slow-call-duration-threshold: 2s # 慢调用时间阈值
+#        slow-call-rate-threshold: 30 # 慢调用百分比峰值
+#        sliding-window-type: time_based # 滑动窗口类型
+#        sliding-window-size: 2 # 滑动窗口大小 count_based6个请求 time_base6秒
+#        minimum-number-of-calls: 2 # 每个滑动窗口的周期
+#        automatic-transition-from-open-to-half-open-enabled: true # 开始过度到半开状态
+#        wait-duration-in-open-state: 5s # 从开启到半开启需要5s
+#        permitted-number-of-calls-in-half-open-state: 2 #半开状态允许通过的最大请求数
+#        record-exceptions:
+#          - java.lang.Exception
+#    instances:
+#      cloud-payment-service:
+#        base-config: default

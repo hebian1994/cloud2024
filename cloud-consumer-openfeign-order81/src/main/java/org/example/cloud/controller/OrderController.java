@@ -1,6 +1,7 @@
 package org.example.cloud.controller;
 
 import cn.hutool.core.date.DateUtil;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import jakarta.annotation.Resource;
 import org.example.cloud.apis.PayFeignApi;
 import org.example.cloud.entities.PayDTO;
@@ -42,5 +43,20 @@ public class OrderController {
         ResultData payById = payFeignApi.getPayById(id);
         System.out.println(System.currentTimeMillis());
         return payById;
+    }
+
+    @GetMapping("/consumer/pay/circuit/{id}")
+    @CircuitBreaker(name = "cloud-payment-service", fallbackMethod = "myCircuitFallback")
+    public ResultData testCircuit(@PathVariable("id") Integer id) {
+        System.out.println(DateUtil.now());
+        ResultData payById = payFeignApi.circuit(id);
+        System.out.println(DateUtil.now());
+        return payById;
+    }
+
+    public ResultData myCircuitFallback(Integer id, Throwable throwable) {
+        System.out.println(id);
+        System.out.println(throwable);
+        return ResultData.success("fallback");
     }
 }
