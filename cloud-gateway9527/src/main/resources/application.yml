@@ -24,7 +24,9 @@ spring:
           uri: lb://cloud-payment-service # 匹配后提供服务的地址
           predicates:
             - Path=/pay/gateway/get/**    # 断言, 路径匹配后进行路由
-            - After=2024-04-03T16:12:00.000+08:00[Asia/Shanghai]
+#            - After=2024-04-03T16:12:00.000+08:00[Asia/Shanghai]
+            - Cookie=name,testName
+
         - id: pay_routh12               # 路由ID, 要求唯一
           uri: lb://cloud-payment-service # 匹配后提供服务的地址
           predicates:
