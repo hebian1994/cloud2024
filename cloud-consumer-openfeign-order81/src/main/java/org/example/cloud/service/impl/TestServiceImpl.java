@@ -42,7 +42,7 @@ public class TestServiceImpl implements TestService {
     }
 
     @Override
-    @RateLimiter(name = "cloud-payment-service", fallbackMethod = "myRatelimiterFallback")
+    @RateLimiter(name = "cloud-payment-service", fallbackMethod = "myRateLimiterFallback")
     public ResultData ratelimiter(Integer id) {
         System.out.println(DateUtil.now());
         ResultData payById = payFeignApi.bulkhead(id);
@@ -65,7 +65,7 @@ public class TestServiceImpl implements TestService {
         return CompletableFuture.supplyAsync(() -> ResultData.success("myPoolBulkheadFallback"));
     }
 
-    public ResultData myRatelimiterFallback(Integer id, Throwable throwable) {
+    public ResultData myRateLimiterFallback(Integer id, Throwable throwable) {
         System.out.println(id);
         System.out.println("myBulkheadFallback");
         System.out.println(throwable);
