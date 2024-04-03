@@ -2,6 +2,7 @@ package org.example.cloud.service.impl;
 
 import cn.hutool.core.date.DateUtil;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import jakarta.annotation.Resource;
 import lombok.SneakyThrows;
 import org.example.cloud.apis.PayFeignApi;
@@ -40,6 +41,15 @@ public class TestServiceImpl implements TestService {
         return future;
     }
 
+    @Override
+    @RateLimiter(name = "cloud-payment-service", fallbackMethod = "myRatelimiterFallback")
+    public ResultData ratelimiter(Integer id) {
+        System.out.println(DateUtil.now());
+        ResultData payById = payFeignApi.bulkhead(id);
+        System.out.println(DateUtil.now());
+        return payById;
+    }
+
 
     public ResultData myBulkheadFallback(Integer id, Throwable throwable) {
         System.out.println(id);
@@ -53,5 +63,12 @@ public class TestServiceImpl implements TestService {
         System.out.println("myPoolBulkheadFallback");
         System.out.println(throwable);
         return CompletableFuture.supplyAsync(() -> ResultData.success("myPoolBulkheadFallback"));
+    }
+
+    public ResultData myRatelimiterFallback(Integer id, Throwable throwable) {
+        System.out.println(id);
+        System.out.println("myBulkheadFallback");
+        System.out.println(throwable);
+        return ResultData.success("myBulkheadFallback");
     }
 }

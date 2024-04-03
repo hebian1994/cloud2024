@@ -8,4 +8,6 @@ public interface TestService {
     ResultData testBulkheadS(Integer id) ;
 
     CompletableFuture<ResultData> testFixedThreadPoolBulkhead(Integer id);
+
+    ResultData ratelimiter(Integer id) ;
 }

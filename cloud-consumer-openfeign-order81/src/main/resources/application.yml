@@ -56,15 +56,27 @@ resilience4j:
     configs:
       default:
         timeout-duration: 70s # 默认1s 超过1s直接降级 (坑)
-  thread-pool-bulkhead: # 线程池
+  ratelimiter:
     configs:
       default:
-        max-thread-pool-size: 1
-        core-thread-pool-size: 1
-        queue-capacity: 1
+        #        in one period , the max request time allowed
+        limit-for-period: 2
+        #        period refresh time.window will slide
+        limit-refresh-period: 1s
+        #        if window is full , other request wait time
+        timeout-duration: 1
     instances:
       cloud-payment-service:
         base-config: default
+#  thread-pool-bulkhead: # 线程池
+#    configs:
+#      default:
+#        max-thread-pool-size: 1
+#        core-thread-pool-size: 1
+#        queue-capacity: 1
+#    instances:
+#      cloud-payment-service:
+#        base-config: default
 #  bulkhead: # 信号量舱壁
 #    configs:
 #      default:

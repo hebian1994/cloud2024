@@ -71,6 +71,12 @@ public class OrderController {
         return testService.testFixedThreadPoolBulkhead(id).get();
     }
 
+    @SneakyThrows
+    @GetMapping("/consumer/pay/ratelimiter/{id}")
+    public ResultData ratelimiter(@PathVariable("id") Integer id) {
+        return testService.ratelimiter(id);
+    }
+
 
     public ResultData myCircuitFallback(Integer id, Throwable throwable) {
         System.out.println(id);
