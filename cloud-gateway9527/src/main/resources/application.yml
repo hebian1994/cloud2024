@@ -24,7 +24,9 @@ spring:
           uri: lb://cloud-payment-service # 匹配后提供服务的地址
           predicates:
             - Path=/pay/gateway/get/**    # 断言, 路径匹配后进行路由
-            - Host=localhost
+#            - Host=localhost
+#            http://localhost:9527/pay/gateway/get/1?name=test
+            - Query=name,test
             #            should have X-Request-Id in request header and the value is an Integer
 #            refer to @HeaderRoutePredicateFactory
 #            - Header=X-Request-Id,[0-9]* #正则表达式 数字
