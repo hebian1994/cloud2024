@@ -1,0 +1,16 @@
+server:
+  port: 8401
+
+spring:
+  application:
+    name: cloud-alibaba-sentinel-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: localhost:8848
+    sentinel:
+      transport:
+        dashboard: localhost:8080
+        port: 8719 # 默认端口
+      #        diff method in controller invoke same service method is not same root chain
+      web-context-unify: false
