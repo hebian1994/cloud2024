@@ -1,0 +1,8 @@
+server:
+  port: 3377
+spring:
+  profiles:
+    active: dev
+#    active: test
+#    active: dev
+#config: test11111
