@@ -27,6 +27,14 @@
     <file url="file://$PROJECT_DIR$/cloudalibaba-sentinel-service8401/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mybatis_generator2024/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/mybatis_generator2024/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/seata-account-service2003/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/seata-account-service2003/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/seata-order-service2001/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/seata-order-service2001/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/seata-storage-service2002/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/seata-storage-service2002/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/seata/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/src/main/resources" charset="UTF-8" />
     <file url="PROJECT" charset="UTF-8" />
