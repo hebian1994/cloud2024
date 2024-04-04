@@ -11,6 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 @RestController
 public class RateLimitController {
+    @GetMapping("/rateLimit/byUrl")
+    //@SentinelResource()
+    public String byUrl() {
+        return "byUrl";
+    }
+
     @GetMapping("/rateLimit/doActon/{p1}")
     @SentinelResource(value = "doActionSentinelResource",
             blockHandler = "doActionBlockHandler",

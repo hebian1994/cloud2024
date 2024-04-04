@@ -14,3 +14,15 @@ spring:
         port: 8719 # 默认端口
       #        diff method in controller invoke same service method is not same root chain
       web-context-unify: false
+      datasource:
+        ds1:
+          nacos:
+            server-addr: localhost:8848
+            data-id: ${spring.application.name}-rule-flow
+            group-id: DEFAULT_GROUP
+            data-type: json
+            rule-type: flow # com.alibaba.cloud.sentinel.datasource.RuleType
+#ds1-sentinel-nacos-datasource
+#logging:
+#  level:
+#    com.alibaba: debug
